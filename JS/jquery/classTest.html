@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>classTest.html</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <style>
+        .active {
+            color : red;
+            font-size: 2em;
+        }
+        .highlight {
+            background-color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <input id="fruit">
+    <div id="box">   
+        <div class="active">사과</div>
+        <div>바나나</div>
+        <div>키위</div>
+
+    </div>
+    <button id="btnSelect">선택한 과일은?</button>
+    <button id="btnCancle">모두 선택 해제</button>
+
+
+
+    <script>
+        //jquery 보강  [jquery는 무조건 다 함수 => 괄호 필요]
+
+        //직접 이벤트
+
+        // document.querySelector("#fruit").addEventListener("keypress",()=>{
+        //     if(event.keyCode == 13){
+        //         const tag = "<div>" + event.target.value;
+        //         document.querySelector("#box").insertAdjacentHTML("beforeend",tag);
+        //     }
+        // })
+
+        // -> jquery로 변경 
+        $("#fruit").on("keypress",()=>{
+            if(event.keyCode == 13){
+                const tag = "<div>" + event.target.value;
+                $("#box").append(tag);
+            }
+        })
+
+        //group이벤트 (부모에게 이벤트 걸어준다.) = input 박스에 div가 추가 되어도 동일하게 적용 되게 부모에게 이벤트를 걸어줜다. 
+        
+        // document.querySelector('#box').addEventListener("click", ()=>{
+        //     // 부모에게 걸어준 이벤트가 적용이 안되게 하는 방법2 (태그의 이름이 DIV인 경우만 적용) ==> 이 경우에 태그를 뒤에 추가 하더라도 적용이 잘 된다.
+        //     if(event.target.tagName == "DIV"){
+        //         event.target.classList.toggle("active");
+        //         }
+        // });
+
+        // -> jquery로 변경 
+        $('#box').on("click", "div", ()=>{
+            // 부모에게 걸어준 이벤트가 적용이 안되게 하는 방법2 (태그의 이름이 DIV인 경우만 적용) ==> 이 경우에 태그를 뒤에 추가 하더라도 적용이 잘 된다.
+                $(event.target).toggleClass("active");     
+        });
+        
+        
+
+        // btnSelect.addEventListener("click",function(){
+            
+        //     //event.stopPropagation(); // 부모에게 걸어준 이벤트가 적용이 안되게 하는 방법1 
+
+        //     // class= "active"인 태그들을 선택(찾기)
+        //     let fruits = document.querySelectorAll(".active")
+        //     // 선택된 태그들 콘솔에 출력 
+            
+        //     //for문 사용 하기 1.
+        //     fruits.forEach(fruit => {
+        //         console.log(fruit.innerHTML);
+        //     });
+        //     //map 방식 사용 하기 2. 
+        //     //Array.from(document.querySelectorAll(".active")).map(ele=> ele.innerHTML)
+        // })
+
+        //jquery 로 변경 
+        $("#btnSelect").on("click", ()=>{
+            
+            // class= "active"인 태그들을 선택(찾기)
+            var fruits = $(".active")
+            // 선택된 태그들 콘솔에 출력 
+            
+            //for문 사용 하기 1.
+            fruits.forEach(fruit => {
+                console.log(fruit.innerHTML);
+            });
+            
+        })
+
+
+        //선택해제 버튼  ("active"인 class를 찾아서 remove Class 해준다.)
+        $("#btnCancle").on("click",()=>{
+            $(".active").removeClass("active");
+        })
+
+    </script>
+</body>
+</html>

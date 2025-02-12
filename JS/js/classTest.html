@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>classTest.html</title>
+    <style>
+        .active {
+            color : red;
+            font-size: 2em;
+        }
+        .highlight {
+            background-color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="active">사과</div>
+    <div>바나나</div>
+    <div>키위</div>
+    <button id="btnSelect">선택한 과일은?</button>
+    <script>
+        //div
+        // var divs = document.getElementsByTagName("div");
+
+        // for(i=0; i<divs.length; i++){
+        //     divs[i].addEventListener("click", ()=>{
+        //         event.target.classList.toggle("active");
+        //     });
+        // }
+
+        /**매번 이벤트를 일일히 따로 걸기 귀찮기 때문에 부모에게 이벤트를 걸어서 자식 까지 이벤트가 연결 된다(버블링)
+         * 그렇다면 동적으로 태그가 추가가 되어도 따로 이벤트를 걸지 않아도 자동으로 걸린다. 
+        */
+        document.body.addEventListener("click", ()=>{
+            // 부모에게 걸어준 이벤트가 적용이 안되게 하는 방법2 (태그의 이름이 DIV인 경우만 적용) ==> 이 경우에 태그를 뒤에 추가 하더라도 적용이 잘 된다.
+            if(event.target.tagName == "DIV"){
+                event.target.classList.toggle("active");
+                }
+                
+            });
+        
+
+        btnSelect.addEventListener("click",function(){
+            
+            //event.stopPropagation(); // 부모에게 걸어준 이벤트가 적용이 안되게 하는 방법1 
+
+            // class= "active"인 태그들을 선택(찾기)
+            let fruits = document.querySelectorAll(".active")
+            // 선택된 태그들 콘솔에 출력 
+            
+            //for문 사용 하기 1.
+            fruits.forEach(fruit => {
+                console.log(fruit.innerHTML);
+            });
+            //map 방식 사용 하기 2. 
+            Array.from(document.querySelectorAll(".active")).map(ele=> ele.innerHTML)
+        })
+    </script>
+</body>
+</html>

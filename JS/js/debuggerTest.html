@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h1>디버깅테스트</h1>
+        <button id="btn">합계계산</button>
+        <script>
+            btn.addEventListener("click",calc);
+
+            function calc(){
+                let result =0;
+                result = sum1to10(); // 여기서 디버깅 하는 경우 함수를 실행 하게 되는데 f10을 하게 되면 그냥 return total 결과 값이 나오지만, f11번 은 함수 하나하나 쫓아가게 된다.
+                console.log(result);
+            }
+            function sum1to10(){
+                let total = 0;
+                for(let i=1; i<=10; i++){
+                    total += i;
+                }
+                return total;
+                
+            }
+
+        </script>
+</body>
+</html>

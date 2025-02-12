@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--dataset = 데이터속성이 모여 있는 것 e.g prod.dataset.price 도 가능 하고 
+                prod.dataset.count =10 추가도 가능하다.-->
+    <div id="prod" data-pno="p100" data-price="1000">
+        <span class="pname">상품1</span><span>상세정보</span>
+    </div>
+    <div id="prod" data-pno="p101" data-price="10">
+        <span class="pname">상품2</span><span>상세정보</span>
+    </div>
+    <div id="prod" data-pno="p102" data-price="20">
+        <span class="pname">상품3</span><span>상세정보</span>
+    </div>
+
+    <script>
+        //상품1,2,3 클릭시 alert창으로 price보기 (부모(body)에게 이벤트 걸어주기)
+        // document.body.addEventListener("click",function(){
+        //     //event.target = 이벤트가 발생한 대상 
+        //     alert("가격:" + event.target.dataset.price);
+        // })
+
+        //상품1 의 span 에만 이벤트 걸기
+        document.body.addEventListener("click",function(){
+            //디버깅방법1
+            // debugger   //해당 지점에서 진행 중지  (f10하면 다음단계로 이동 )
+
+            //디버깅방법2
+            //f12 > source 에서 중단점 지정하면 1과 같은 효과(더많이 사용)
+
+            //class리스트 중에 pname이 속해 있는가 유무 체크 
+            if(event.target.classList.contains("pname")){
+                //span 태그의 부모인 div가 정보를 가지고 있기 때문에 parentElement 부모를 찾아줘야 한다.
+                alert(event.target.parentElement.dataset.pno);
+            }
+            
+        })
+
+    </script>
+</body>
+</html>
